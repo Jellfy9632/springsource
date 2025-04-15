@@ -6,7 +6,15 @@
     <title>Document</title>
   </head>
   <body>
+    <h3>
+      <a th:href="@{/sample}">thymleaf 코드 연습</a>
+    </h3>
     <h1>테스트</h1>
+    <h3>덧셈</h3>
+    <ul>
+      <li><a href="/basic" th:href="@{/basic}">덧셈</a></li>
+      <li><a href="/calc">사칙연산</a></li>
+    </ul>
     <h3>Board</h3>
     <ul>
       <li><a href="/board/create">게시글작성</a></li>
@@ -20,6 +28,7 @@
       <li><a href="/member/login">로그인</a></li>
       <li><a href="/member/logout">로그아웃</a></li>
       <li><a href="/member/change">비밀번호변경</a></li>
+      <h3 th:text="${session.name1}"></h3>
     </ul>
   </body>
 </html>

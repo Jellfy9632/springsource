@@ -64,3 +64,41 @@ public void method(){
 
 http://localhost:8080/board/update 브라우저에서 요청 => 컨트롤러 응답 => templates 찾기 (templates / board/update)
 => templates / board / update.html 작성
+
+3) 내장 서버 : Tomcat(설치 후 사용 - 스프링부트를 사용한다면 내장되어 있음)
+
+http://localhost:8080/: Tomcat 서버 구동 시 기본경로
+
+브라우저를 통해 http, https 프로토콜에 응답하는 서버 : SW 웹 서버(Apache, NginX)
+WAS(Web Application Server) : 웹서버 + 자바해석 => Tomcat
+
+4) 오류발생
+
+    400 : bad request 잘못된 입력
+    404 : 컨트롤러 경로확인
+    405 : 컨트롤러 경로 + 매핑방식 확인
+
+5) 사용자 입력값 가져오기
+    (1) 변수 이용 : 타입지정가능, 변수명은 form 요소의 이름과 일치
+    (2) 커맨드(DTO) 객체 이용 : 타입지정가능, 변수명은 form 요소의 이름과 일치
+                                커맨드 객체 사용시 장점은 template 페이지까지 입력값이 유지됨
+    (3) HttpServletRequest 이용 : 사용자의 정보를 가져와 입력값 추출
+
+6) @ModelAttribute
+    - 별칭
+    - model.addAttribute("num1", num1) == @ModelAttribute("num1) : template 페이지에서 값을 유지하고 싶다면
+7) RedirectAttributes : 컨트롤러에서 움직이는 방식이 Redirect일때 사용 움직이면서 특정값을 가지고 싶을때 사용
+rttr.addAtribute("userid",10); ?userid=10 => 템플릿 ${param.userid}
+rttr.addFlashAttribute("password", "12"); session 객체에 담는것과 같은 방식 템플릿 ${password}
+
+8) 데이터 유지하기
+ - login.html 입력값 ==> 컨트롤러 ==> logout.html 입력값 유지를 하고싶다면
+    - forward 방식 : @modelAttribute, Model, 커맨드객체
+    - redirect 방식 : RedirectAttributes 이용
+ - login.html 입력값 ==> 컨트롤러 ==> 모든페이지에서 입력값 유지를 하고싶다면
+    - 세션 : 값을 서버쪽에 저장 (객체형태로 담는 것 가능)
+        HttpSession 을 이용해 저장 => 필요없는경우 제거 or 현재 세션이 유지되고 있는 브라우저를 닫으면 종료됨
+    - 쿠키 : 값을 클라이언트 브라우저로 전송 후 저장
+ - login.html 입력값 ==> 컨트롤러 ==> 다른페이지에서는 입력값 소멸?
+    - 컨트롤러에서 변수로 받아오는 경우
+ 
