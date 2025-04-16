@@ -31,7 +31,9 @@
       </tr>
       <tr th:each="dto : ${list}">
         <td th:text="${dto.id}"></td>
-        <td th:text="${dto.first}"></td>
+        <td>
+          <a th:href="@{ex2(id=${dto.id})}" th:text="${dto.first}"></a>
+        </td>
         <td th:text="${dto.last}"></td>
         <td th:text="${#temporals.format(dto.regDateTime, 'yyyy-MM-dd hh:mm')}"></td>
       </tr>
@@ -92,6 +94,31 @@
         <span th:case="true" th:text="${dto.first}"></span>
         <span th:case="false" th:text="${dto.last}"></span>
       </li>
+    </ul>
+    <!--  배포: 실제서버에 프로그램을 올리는 작업 
+      http://localhost:8080/ 로컬
+      http://도메인주소/app/member/login
+      th:href 나 href 경로는 똑같이 표현
+      파라메터를 보내는 방법이 달라짐
+      href : /member/login?id=hong
+      th:href : /member/login(id='hong')
+                /ex1?param1=data&param=10
+      -->
+    <h3>웹 페이지 링크</h3>
+    <ul>
+      <li><a th:href="@{/calc}">calc</a></li>
+      <li><a th:href="@{/ex1(param1='data1',param2=10)}">ex1</a></li>
+    </ul>
+    <h3>thymleaf 유틸리티 객체</h3>
+    <ul>
+      <li th:text="${price}"></li>
+      <li th:text="${#numbers.formatInteger(price,3,'COMMA')}"></li>
+      <li th:text="${#lists.size(options)}"></li>
+      <li th:text="${#lists.contains(options,'AAAA')}"></li>
+      <li th:text="${options}"></li>
+      <li th:text="${#dates.format(now,'yyyy-MM-dd')}"></li>
+      <li th:text="${title}"></li>
+      <li th:text="${#strings.replace(title, 's', 'S')}"></li>
     </ul>
     <script>
       const name = "[[${name}]]";
