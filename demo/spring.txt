@@ -147,3 +147,27 @@ Oracle인 경우
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq_gen")
         -create sequence student_seq start with 1 increment by 1
     
+    ---------------------------------------------------------------------------------------------------
+    날짜어노테이션
+    org.hibernate 제공
+    @CreationTimestamp : 데이터 삽입 시 자동으로 현재 시스템 날짜 시간 삽입
+    @UpdateTimestamp : 데이터 삽입 + 수정 시 자동으로 현재 시스템 날짜 시간 삽입
+
+
+    org.springframewor 제공
+
+    @CreatedDate
+    @LastModifiedDate
+
+    +설정작업 필요
+    main이 있는 클래스에 @EnableJpadAuditing 부착
+    Entity 클래스에 @EntityListeners(value = AuditingEntityListner.class) 부착
+    ---------------------------------------------------------------------------------------------------
+
+    Repository + Entity
+    Repository 제공 메소드
+    1) save() : insert, update
+    2) findById() : select(where)
+    3) findAll() : 전체조회
+    4) deleteById() / delete() : 삭제
+
