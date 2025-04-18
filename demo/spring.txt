@@ -38,6 +38,13 @@ build : 프로젝트 생성, 라이브러리 설정, 코드작업, 컴파일, �
     -싱글톤 방식 (객체는 하나만 생성) 으로 객체 생성
     -@Controller, @Service, @Component
 
+1.5) Injection(주입)
+ - -@Controller, @Service, @Component 를 통해서 생성된 객체를 언제, 어디에 사용할 것인지를 알려주는 개념
+ - @Autowired를 필요한 객체 위에 작성(컨테이너가 관리하는 객체를 주입해주세요)
+
+ @Autowired                          클래스에 @RequiredArgsConstructor 붙이기
+ private MemoService memoService ==  private final MemoService memoService
+
 2)경로 임의로 생성
 http://localhost:8080/ ==> Controller 파일의 메소드와 매핑
 

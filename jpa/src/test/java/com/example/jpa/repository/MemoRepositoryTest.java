@@ -28,7 +28,7 @@ public class MemoRepositoryTest {
     public void updateTest() {
         // Memo memo = Memo.builder().mno(1L).memoText("memoText update").build();
         Memo memo = memoRepository.findById(1L).get();
-        memo.setMemoText("memoText update");
+        memo.changeMemoText("memoText update");
         memoRepository.save(memo);
 
     }
