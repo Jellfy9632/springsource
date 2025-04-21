@@ -1,0 +1,44 @@
+관계설정 annotation
+1) @ManyToOne : 부서와 사원, 팀과 회원,학과와 학생
+              : 정보를 가지고 나올 때 관련 있는 테이블 정보를 가지고 나옴 (left Join)
+              : FetchType.EAGER 인 상태
+2) @OneToMany : 정보를 가지고 나올 때 관련있는 테이블 정보를 안 가지고 나옴
+              : FetchType.LAZY 인 상태
+
+3) @OneToOne : 정보를 가지고 나올 때 관련있는 테이블 정보를 가지고 나옴 (left join)
+              : FetchType.EAGER 인 상태
+
+4) @ManetToMany : 실제 업무환경에서는 잘 사용되지 않음
+              ㄴ@MantToOne 관계로 변경 후 사용
+              FetchType.LAZY인상태
+
+양방향 관계는 없음 : 단 방향 2개를 여는 것
+데이터베이스 테이블은 외래 키 하나로 양쪽이 서로 조인 가능 => 객체는 한 쪽만 관계설정을 하면 안 됨
+단방향 2개를 여는 대신에 주인관계가 어디인지 알려준다( @mappedBy = "")
+장점: 조회 방법이 하나 더 생기는 것
+       부서를 조회하면서 동시에 부서에 속한 모든 사원의 정보가 조회 가능
+
+프록시 : 프록시를 통해 연관된 객체를 실제 사용하는 시점에 데이터베이스에서 조회하도록 함(지연로딩)
+         자주 함께 사용하는 객체들은 조인을 통해서 함께 조회(즉시로딩)
+
+FetchType.Lazy : 지연로딩
+FetchType.EAGER : 즉시로딩
+
+
+
+FetchType.Lazy 일 때 관련있는 테이블 정보를 접근한다면
+LazyInitializationException 발생함  
+
+해결법 1) @Transactional : SELECT 구문 2개로 처리
+       2) FetchType.EAGER =>left join 처리
+
+영속성관리
+: 양방향일때 사용할 수 있는 개념
+: 부모 저장 시 자식 엔티티도 같이 저장
+
+@OneToMany(mappedBy = "parent", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, orphanRemoval = true)
+cascade = { CascadeType.PERSIST, CascadeType.REMOVE }
+ㄴ 부모 저장,삭제 시 자식도 같이 작업이 일어나는 상황지정
+
+부모객체에서 자식 객체(고아객체)를 제거하면 자식객체가 제거
+ㄴ orphanRemoval = true

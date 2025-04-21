@@ -36,4 +36,15 @@ public class TeamRepositoryTest {
         // 회원정보 삽입
         teamMemberRepository.save(TeamMember.builder().username("user2").team(team).build());
     }
+
+    @Test
+    public void readTest() {
+        // 팀 조회
+        Team team = teamRepository.findById(1L).get();
+        // 멤버 조회
+        TeamMember member1 = teamMemberRepository.findById(1L).get();
+
+        System.out.println(team);
+        System.out.println(member1);
+    }
 }
