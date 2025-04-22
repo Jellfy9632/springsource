@@ -107,4 +107,26 @@ public class TeamRepositoryTest {
         team.getMembers().forEach(member -> System.out.println(member));
     }
 
+    // -------------------------------
+    // 양방향 연관관계에서
+    // 영속성 전이: Cascade
+    // -------------------------------
+
+    @Test
+    public void insetTest3() {
+
+        Team team = Team.builder().teamName("team3").build();
+
+        TeamMember member = TeamMember.builder().username("홍길동").team(team).build();
+        team.getMembers().add(member);
+        teamRepository.save(team);
+    }
+
+    @Test
+    public void deleteTest2() {
+        // 부모 삭제시 자식도 같이 삭제
+        // deleteTest()와 비교
+        teamRepository.deleteById(3L);
+    }
+
 }

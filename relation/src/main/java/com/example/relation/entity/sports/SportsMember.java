@@ -1,5 +1,7 @@
 package com.example.relation.entity.sports;
 
+import com.example.relation.entity.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @Entity
-public class SportsMember {
+public class SportsMember extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

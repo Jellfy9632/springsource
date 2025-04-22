@@ -3,6 +3,7 @@ package com.example.relation.entity.team;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,7 +37,12 @@ public class Team {
     private String teamName;
 
     @Builder.Default
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER) // 관계있는 테이블 정보를 즉시 가지고 나오기
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.REMOVE }) // 관계있는
+                                                                                                                  // 테이블
+                                                                                                                  // 정보를
+                                                                                                                  // 즉시
+                                                                                                                  // 가지고
+                                                                                                                  // 나오기
     // : One 테이블만 select 실행
     // => 해결법 1) @Transactional
     // 2) FetchType.EAGER =>left join 처리

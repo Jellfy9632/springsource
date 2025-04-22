@@ -178,3 +178,6 @@ Oracle인 경우
     3) findAll() : 전체조회
     4) deleteById() / delete() : 삭제
 
+- modelmapper : dto ==> entity, entity ==> dto 자동으로 처리
+    1. RootConfig.java 작성
+    

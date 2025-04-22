@@ -1,38 +1,37 @@
-package com.example.relation.entity.sports;
+package com.example.mart.entity;
 
-import com.example.relation.entity.BaseEntity;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-// 회원 : 사물함의 관계 1:1
-
-@Getter
-@Setter
+@Entity
+@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString(exclude = "sportsMember")
-@Entity
-public class Locker extends BaseEntity {
+@Getter
+public class Category extends BaseEntity {
+
     @Id
+    @Column(name = "CATEGORY_ID")
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "LOCKER_ID")
     private Long id;
 
     private String name;
 
-    @OneToOne(mappedBy = "locker", fetch = FetchType.LAZY)
-    private SportsMember sportsMember;
+    @ManyToMany(mappedBy = "Category")
+    private CategoryItem categoryItem;
+
 }
