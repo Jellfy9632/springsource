@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@ToString
+@ToString(exclude = { "item", "category" })
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

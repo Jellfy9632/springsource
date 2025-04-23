@@ -1,0 +1,26 @@
+1. applicationpropertise 수정
+2. modelmapper 라이브러리 추가
+3. pom.xml dependency 추가
+        <dependency>
+    		<groupId>nz.net.ultraq.thymeleaf</groupId>
+    		<artifactId>thymeleaf-layout-dialect</artifactId>
+    		<version>3.4.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.modelmapper</groupId>
+    		<artifactId>modelmapper</artifactId>
+    		<version>3.2.2</version>
+		</dependency>
+4. modelmapper 사용을 위해 config파일 작성
+5. BaseEntity 작성
+6. 메인 클래스 위에 @EnableJpaAuditing 어노테이션
+
+Todo
+- todo 작성
+- todo 완료여부
+- 전체 todo 목록 보기
+- todo 삭제
+- 완료한 todo 목록 보기
+
+ToDo 테이블
+-내용 , 작성일, 수정일자, 완료여부 (true,false) , 중요도 (true,false)
