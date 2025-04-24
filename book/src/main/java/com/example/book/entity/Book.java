@@ -1,4 +1,4 @@
-package com.example.todo.entity;
+package com.example.book.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,27 +15,26 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
-@Table(name = "todo")
-@Entity
+@ToString
 @Builder
-public class ToDo extends BaseEntity {
-    // -내용 , 작성일, 수정일자, 완료여부 (true,false) , 중요도 (true,false)
+@Table(name = "BOOKTBL")
+@Entity
+public class Book extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TODO_ID")
-    private Long id;
+    @Column(name = "code")
+    private Long code;
 
-    @Column(nullable = false)
-    private String content;
+    @Column(nullable = false, name = "title")
+    private String title;
 
-    @Column(columnDefinition = "NUMBER(1) DEFAULT 0")
-    private boolean completed;
+    @Column(nullable = false, name = "autor")
+    private String author;
 
-    @Column(columnDefinition = "NUMBER(1) DEFAULT 0")
-    private boolean importanted;
+    @Column(nullable = false, name = "price")
+    private Integer price;
 
 }
