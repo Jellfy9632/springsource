@@ -24,3 +24,7 @@ Todo
 
 ToDo 테이블
 -내용 , 작성일, 수정일자, 완료여부 (true,false) , 중요도 (true,false)
+
+create 메소드 필드에러시 메세지 출력코드
+
+<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></div>

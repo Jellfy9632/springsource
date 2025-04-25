@@ -6,6 +6,31 @@
   </th:block>
   <div layout:fragment="content">
     <!-- 본문내용 -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">CreatedDate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="book : ${books}">
+          <th scope="row" th:text="${book.code}"></th>
+          <td><a th:href="@{/book/read(code=${book.code})}" th:text="${book.title}"></a></td>
+          <td th:text=" ${book.author}"></td>
+          <td th:text=" ${#temporals.format(book.createdDate, 'yyyy-MM-dd')}"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <th:block layout:fragment="script"></th:block>
+  <th:block layout:fragment="script">
+    <script>
+      const code = "[[${code}]]";
+      if (code) {
+        alert(code + "번 도서 작성완료");
+      }
+    </script>
+  </th:block>
 </html>
