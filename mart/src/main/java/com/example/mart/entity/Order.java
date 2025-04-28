@@ -33,7 +33,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = { "member", "orderItem", "deivery" })
+@ToString(exclude = { "member", "orderItems", "delivery" })
 @Table(name = "ORDERS") // order 테이블명 사용할 수 없음 : order by 때문에
 @Entity
 public class Order {

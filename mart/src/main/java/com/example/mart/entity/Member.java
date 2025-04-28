@@ -38,6 +38,6 @@ public class Member extends BaseEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "member")
-    private List<Order> Orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
 }

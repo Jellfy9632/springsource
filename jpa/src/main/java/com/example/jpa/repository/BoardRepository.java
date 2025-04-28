@@ -3,11 +3,13 @@ package com.example.jpa.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
 
 import com.example.jpa.entity.Board;
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Long>, QuerydslPredicateExecutor<Board> {
 
     // // WHERE b.WRITER = 'user4'
     // List<Board> findByWriter(String writer);
@@ -41,14 +43,19 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // @Query
 
     // --------------------------------------------------
-    @Query("select b from Board b where b.writer = ?1")
-    List<Board> findByWriter(String writer);
+    // @Query("select b from Board b where b.writer = ?1")
+    // List<Board> findByWriter(String writer);
+    @Query("select b from Board b where b.writer = :writer")
+    List<Board> findByWriter(@Param("writer") String writer);
 
     @Query("select b from Board b where b.writer like ?1%")
     List<Board> findByWriterStartingWith(String writer);
 
     @Query("select b from Board b where b.writer like %?1%")
     List<Board> findByWriterContaining(String writer);
+
+    @Query("select b.title, b.writer from Board b where b.title like %?1%")
+    List<Object[]> findByTitle2(String title);
 
     // nativeQuery = true : sql 구문 형식 사용법
     // from 이후 DB 테이블 명을 직접 사용

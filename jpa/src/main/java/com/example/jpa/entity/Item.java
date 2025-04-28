@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +29,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
+@Table(name = "JPA_ITEM")
 @Entity
 public class Item {
     // id, item_nm, price, stock_number, item_detail, item_sell_status, reg_itemm,
