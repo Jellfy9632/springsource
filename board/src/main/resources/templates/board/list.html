@@ -2,5 +2,51 @@
 <html lang="en" layout:decorate="~{layouts/layout}">
   <div layout:fragment="content">
     <h1>Board List</h1>
+    <!-- BNO, TITLE, CREATED_DATE, NAME, REPLYCNT -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성일</th>
+          <th scope="col">작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="dto : ${result.dtoList}">
+          <th scope="row" th:text="${dto.bno}"></th>
+          <td><a th:href="@{read(bno=${dto.bno})}">[[${dto.title}]]</a>--------[[${dto.replyCount!=null?dto.replyCount:0}]]</td>
+          <td scope="row" th:text="${#temporals.format(dto.createdDate, 'yyyy-MM-dd')}"></th>
+          <td scope="row" th:text="${dto.name}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <nav aria-label="...">
+      <ul class="pagination justify-content-center">
+        <li th:class="page-item" th:if="${result.prev}">
+          <a
+            class="page-link"
+            th:href="@{list(page=${result.prevPage},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
+            >Previous</a
+          >
+        </li>
+        
+        <li th:class="'page-item ' + ${result.current == page ? 'active' : ''}" th:each=" page: ${result.pageNumList}">
+          <a
+            class="page-link"
+            th:href="@{list(page=${page},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+            >[[${page}]]</a
+          >
+        </li>
+
+        <li th:class="page-item" th:if="${result.next}">
+          <a
+            class="page-link"
+            th:href="@{list(page=${result.nextPage},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+            >Next</a
+          >
+        </li>
+      </ul>
+    </nav>
   </div>
 </html>

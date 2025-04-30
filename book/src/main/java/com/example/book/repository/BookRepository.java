@@ -8,8 +8,6 @@ import com.example.book.entity.QBook;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-import java.util.List;
-
 public interface BookRepository extends JpaRepository<Book, Long>, QuerydslPredicateExecutor<Book> {
 
     // 임의의 값을 포함하는 결과를 출력
