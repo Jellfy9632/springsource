@@ -3,32 +3,31 @@
   <div layout:fragment="content">
     <h1>Board Read</h1>
 
-    <form>
-      <div class="mb-3">
-        <label for="bno" class="form-label">번호</label>
-        <input type="text" class="form-control" id="bno" name="bno" th:value="${dto.bno}" />
-      </div>
+    <form method="post" th:object="${dto}" novalidate>
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
         <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" />
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></div>
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">내용</label>
         <textarea type="text" class="form-control" id="content" name="content">[[${dto.content}]]</textarea>
+        <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">이메일</label>
+        <input type="email" class="form-control" id="email" name="email" th:value="${dto.email}" />
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">작성자</label>
         <input type="text" class="form-control" id="name" name="name" th:value="${dto.name}" />
       </div>
 
-      <a
-        class="btn btn-primary"
-        th:href="@{modify(bno=${dto.bno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
-        >수정</a
-      >
+      <button type="submit" class="btn btn-primary">작성</button>
       <a
         class="btn btn-success"
-        th:href="@{list(bno=${dto.bno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
+        th:href="@{list(page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
         >목록</a
       >
     </form>

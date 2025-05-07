@@ -1,0 +1,14 @@
+
+1) Get : Read
+2) Post : Create
+3) Put/Patch : Update
+4) Delete : delete
+
+@ RestController
+@ DeleteMapping
+@ PutMapping
+@ PathVariable
+@ RequestBody
+@ ResponseBody
+
+ResponseEntity

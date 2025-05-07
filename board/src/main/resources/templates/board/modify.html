@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{layouts/layout}">
   <div layout:fragment="content">
-    <h1>Board Read</h1>
+    <h1>Board Modify</h1>
 
-    <form>
+    <form method="post">
       <div class="mb-3">
         <label for="bno" class="form-label">번호</label>
-        <input type="text" class="form-control" id="bno" name="bno" th:value="${dto.bno}" />
+        <input type="text" class="form-control" id="bno" name="bno" th:value="${dto.bno}" readonly />
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
@@ -18,18 +18,19 @@
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">작성자</label>
-        <input type="text" class="form-control" id="name" name="name" th:value="${dto.name}" />
+        <input type="text" class="form-control" id="name" name="name" th:value="${dto.name}" readonly />
       </div>
 
-      <a
-        class="btn btn-primary"
-        th:href="@{modify(bno=${dto.bno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
-        >수정</a
-      >
+      <button type="submit" class="btn btn-primary">저장</button>
       <a
         class="btn btn-success"
-        th:href="@{list(bno=${dto.bno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
+        th:href="@{list(page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
         >목록</a
+      >
+      <a
+        class="btn btn-danger"
+        th:href="@{remove(bno=${dto.bno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
+        >삭제</a
       >
     </form>
     <div class="row mt=3">
