@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.board.entity.Board;
 import com.example.board.entity.Reply;
+import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     // bno 를 기준으로 댓글을 삭제하는메소드
@@ -14,4 +15,7 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     @Modifying // delete,update 무조건 사용해야 함
     @Query("DELETE FROM Reply r WHERE r.board.bno = :bno")
     void deleteByBoardBno(Long bno);
+
+    // 특정 글 조회시 달려있는 댓글 모두 가져오기
+    List<Reply> findByBoardOrderByRno(Board board);
 }

@@ -7,8 +7,16 @@
 @ RestController
 @ DeleteMapping
 @ PutMapping
-@ PathVariable
-@ RequestBody
-@ ResponseBody
+@ PathVariable : 경로에 들어있는 값 변수에 담기
+@ RequestBody : json => 자바 객체 연동
+@ ResponseBody : 컨트롤러에서 리턴하는 값은 데이터임
 
-ResponseEntity
+ResponseEntity : data + 상태코드
+
+----------------------------------------
+CORS(Cross Origin Resource Sharing)
+
+서버 : localhost:8080
+클라이언트 : localhost:5500, localhost:5173
+
+서버단에서 해결 => Rest 프로젝트
