@@ -33,6 +33,24 @@
       >
     </form>
     <div class="row mt=3">
+      <div>
+        <hr />
+        <div class="border p-4">
+          <form action="" method="post" id="replyForm">
+            <input type="hidden" name="rno" />
+            <input type="hidden" name="bno" th:value="${dto.bno}" />
+            <div class="input-group mb-3">
+              <span class="input-group-text">작성자</span>
+              <input type="text" class="form-control" id="replyer" name="replyer" />
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">댓글</span>
+              <textarea type="text" class="form-control" id="text" name="text"></textarea>
+              <button type="submit" class="btn btn-outline-secondary">등록</button>
+            </div>
+          </form>
+        </div>
+      </div>
       <h5 class="my-3">댓글 수 : <span th:text="${dto.replyCount}"></span></h5>
       <div class="replyList boarder px-2">
         <!-- 댓글목록 -->

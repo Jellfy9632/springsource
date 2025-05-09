@@ -18,11 +18,18 @@ const formatDate = (str) => {
   );
 };
 
+const relpyListElement = document.querySelector(".replyList");
+const replyForm = document.querySelector("#replyForm");
+
 const replyList = () => {
   axios.get(`/replies/board/${bno}`).then((res) => {
     console.log(res.data);
 
     const data = res.data;
+    console.log("댓글 수", data.length);
+
+    // 댓글갯수수정
+    relpyListElement.previousElementSibling.querySelector("span").innerHTML = data.length;
 
     let result = "";
     data.forEach((reply) => {
@@ -39,7 +46,7 @@ const replyList = () => {
       result += `</div></div>`;
     });
 
-    document.querySelector(".replyList").innerHTML = result;
+    relpyListElement.innerHTML = result;
   });
 };
 
@@ -66,9 +73,58 @@ document.querySelector(".replyList").addEventListener("click", (e) => {
 
       // 댓글 다시 불러오기
       replyList();
+      // 댓글개수 수정
     });
   } else if (btn.classList.contains("btn-outline-success")) {
     //수정
+    axios.get(`/replies/${rno}`).then((res) => {
+      console.log(res.data);
+      const data = res.data;
+      // replyForm 안에 보여주기
+      replyForm.rno.value = data.rno;
+      replyForm.replyer.value = data.replyer;
+      replyForm.text.value = data.text;
+    });
+  }
+});
+replyForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const rno = form.rno.value;
+
+  if (rno) {
+    //수정
+    axios
+      .put(`/replies/${rno}`, form, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("댓글 수정완료");
+        replyForm.rno.value = "";
+        replyForm.replyer.value = "";
+        replyForm.text.value = "";
+        replyList();
+      });
+  } else {
+    //삽입
+    axios
+      .post(`/replies/new`, form, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("댓글 작성완료");
+        replyForm.rno.value = "";
+        replyForm.replyer.value = "";
+        replyForm.text.value = "";
+        replyList();
+      });
   }
 });
 
