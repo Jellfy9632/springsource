@@ -70,7 +70,8 @@ public class ReplyService {
         ReplyDTO dto = ReplyDTO.builder()
                 .rno(reply.getRno())
                 .text(reply.getText())
-                .replyer(reply.getReplyer())
+                .replyerEmail(reply.getReplyer().getEmail())
+                .replyerName(reply.getReplyer().getName())
                 .bno(reply.getBoard().getBno())
                 .createdDate(reply.getCreatedDate())
                 .build();
@@ -81,7 +82,7 @@ public class ReplyService {
         Reply reply = Reply.builder()
                 .rno(dto.getRno())
                 .text(dto.getText())
-                .replyer(dto.getReplyer())
+                .replyer(Member.builder().email(dto.getReplyerEmail()).build())
                 .board(Board.builder().bno(dto.getBno()).build())
                 .build();
         return reply;

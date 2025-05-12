@@ -3,8 +3,6 @@ package com.example.board.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.board.BaseEntity;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,7 +45,7 @@ public class Board extends BaseEntity {
     // 게시글에 달려있는 댓글 정보 조회
 
     @Builder.Default
-    @OneToMany
+    @OneToMany(mappedBy = "board")
     private List<Reply> replies = new ArrayList<>();
 
     public void changeContent(String content) {

@@ -1,7 +1,5 @@
 package com.example.board.entity;
 
-import com.example.board.BaseEntity;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Builder
-@ToString(exclude = "board")
+@ToString(exclude = { "board", "replyer" })
 @Entity
 public class Reply extends BaseEntity {
 
@@ -33,8 +31,8 @@ public class Reply extends BaseEntity {
     @Column(nullable = false)
     private String text;
 
-    @Column(nullable = false)
-    private String replyer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member replyer;
 
     @JoinColumn(name = "board_id")
     @ManyToOne(fetch = FetchType.LAZY)

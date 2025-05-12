@@ -3,7 +3,7 @@
   <div layout:fragment="content">
     <h1>Board Read</h1>
 
-    <form method="post" th:object="${dto}" novalidate>
+    <form method="post" th:object="${dto}" novalidate th:action="@{/board/create}">
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
         <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" />
@@ -15,13 +15,11 @@
         <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></div>
       </div>
       <div class="mb-3">
-        <label for="email" class="form-label">이메일</label>
-        <input type="email" class="form-control" id="email" name="email" th:value="${dto.email}" />
-        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+        <input type="hidden" class="form-control" id="email" name="email" th:value="${#authentication.name}" />
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">작성자</label>
-        <input type="text" class="form-control" id="name" name="name" th:value="${dto.name}" />
+        <input type="text" class="form-control" id="name" name="name" th:value="${#authentication.principal.name}" />
       </div>
 
       <button type="submit" class="btn btn-primary">작성</button>
