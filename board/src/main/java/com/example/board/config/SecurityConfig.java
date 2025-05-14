@@ -38,8 +38,10 @@ public class SecurityConfig {
                 // .httpBasic(Customizer.withDefaults());
 
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/css/**", "/js/**", "/image/**")
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/assets/**")
                         .permitAll()
+                        .requestMatchers("/board/read").permitAll()
+                        .requestMatchers("/board/modify").hasAnyRole("USER", "ADMIN", "MANAGER")
                         .anyRequest().permitAll())
 
                 .formLogin(login -> login.loginPage("/member/login")

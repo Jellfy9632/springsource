@@ -29,3 +29,23 @@ id에 해당하는 요소의 이름은 반드시 username (변경가능)
 
 CSRF : CSRF(Cross-Site Request Forgery)는 웹 보안 취약점으로, 인증된
 사용자가 의도하지 않게 악성 웹사이트의 요청을 실행하도록 유도하는 공격
+
+-403에러
+ csrf 값 확인: form action 값 적었는지 확인
+ axios, fetch => headers에 값 추가했는지 확인
+
+ -thymleaf security 표현하기
+- value = ${#authentication.principal.name}
+
+- sec:authentication="name" : id 가져오기
+- sec:authenticaton="principal.authorities" : 권한 가져오기
+- sec:authorize="isAuthenticated"
+- sec:authorize="hasRole(ROLE_ADMIN)"
+- sec:authorize="hasAnyRole({'ROLE_USER','ROLE_MANAGER','ROLE_ADMIN'})"
+        hasAnyRole() : Role 여러개 중 하나만 만족한다면
+        hasRole() : Role 하나만 작성하고 그 Role 만족한다면
+
+-작성한 경로를 제외하고는 모두 로그인 필요함
+http
+        .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/assets/**").anyRequest().authenticated())

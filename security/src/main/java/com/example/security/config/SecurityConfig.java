@@ -40,6 +40,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/js/**", "/image/**")
                         .permitAll()
+                        .requestMatchers("/board/read").permitAll()
+                        .requestMatchers("/board/modify").hasAnyRole("ADMIN", "MANAGER", "USER")
                         .anyRequest().permitAll())
 
                 .formLogin(login -> login.loginPage("/member/login")
