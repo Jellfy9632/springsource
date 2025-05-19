@@ -12,9 +12,9 @@
               class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
             >
               <th class="px-4 py-3">#</th>
-              <th class="px-4 py-3">제목</th>
-              <th class="px-4 py-3">리뷰 수</th>
-              <th class="px-4 py-3">리뷰 평점</th>
+              <th class="px-4 py-3">영화명</th>
+              <th class="px-4 py-3">리뷰수</th>
+              <th class="px-4 py-3">리뷰평점</th>
               <th class="px-4 py-3">등록일</th>
             </tr>
           </thead>
@@ -23,11 +23,12 @@
               <td class="px-4 py-3 text-sm" th:text="${movie.mno}"></td>
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
-                  <!-- 포스터 보여줄거지롱-->
+                  <!-- 포스터 -->
                   <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                     <img
                       class="object-cover w-full h-full rounded-full"
-                      src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                      th:if="${movie.movieImages.size() > 0 && movie.movieImages[0].path!=null}"
+                      th:src="|/upload/display?fileName=${movie.movieImages[0].getThumbnailURL()}|"
                       alt=""
                       loading="lazy"
                     />
@@ -35,7 +36,10 @@
                   </div>
                   <div>
                     <p class="font-semibold">
-                      <a href="" th:text="${movie.title}"></a>
+                      <a
+                        th:href="@{/movie/read(mno=${movie.mno},page=${pageRequestDTO.page},size=${pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
+                        th:text="${movie.title}"
+                      ></a>
                     </p>
                   </div>
                 </div>
@@ -56,13 +60,12 @@
       <div
         class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
       >
-        <span class="flex items-center col-span-3">Showing 21-30 of 100</span>
+        <span class="flex items-center col-span-3">Showing 21-30 of [[${result.totalCount}]]</span>
         <span class="col-span-2"></span>
         <!-- Pagination -->
         <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
           <nav aria-label="Table navigation">
             <ul class="inline-flex items-center">
-              <!--Previous-->
               <li th:if="${result.prev}">
                 <a
                   class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
@@ -78,21 +81,19 @@
                   </svg>
                 </a>
               </li>
-
               <li th:each=" page: ${result.pageNumList}">
                 <a
-                  th:class="'px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple ' + ${result.current == page ? 'text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600':''}"
-                  th:href="@{list(page=${page},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+                  th:class="'px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple ' + ${result.current == page ? ' text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600':''}"
+                  th:href="@{list(page=${page},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
                 >
                   [[${page}]]
                 </a>
               </li>
-              <!--next-->
               <li th:if="${result.next}">
                 <a
                   class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                   aria-label="Next"
-                  th:href="@{list(page=${result.nextPage},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+                  th:href="@{list(page=${result.nextPage},size=${result.pageRequestDTO.size},type=${pageRequestDTO.type},keyword=${pageRequestDTO.keyword})}"
                 >
                   <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
                     <path

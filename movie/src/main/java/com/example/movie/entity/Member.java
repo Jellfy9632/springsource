@@ -12,15 +12,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Table(name = "m_member")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @ToString
+@Entity
 public class Member extends BaseEntity {
 
     @Id
@@ -34,4 +35,5 @@ public class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
+
 }

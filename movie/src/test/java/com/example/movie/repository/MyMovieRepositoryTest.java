@@ -19,7 +19,7 @@ import com.example.movie.entity.MovieImage;
 import com.example.movie.entity.Review;
 
 @SpringBootTest
-public class MovieRepositoryTest {
+public class MyMovieRepositoryTest {
 
     @Autowired
     private MovieRepository movieRepository;

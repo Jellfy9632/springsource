@@ -7,7 +7,6 @@ import java.util.List;
 import com.example.movie.entity.MovieImage;
 
 import lombok.AllArgsConstructor;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,25 +14,23 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@Builder
 public class MovieDTO {
-
     private Long mno;
     private String title;
-
     @Builder.Default
     private List<MovieImageDTO> movieImages = new ArrayList<>();
-
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+
     // 평점
     private double avg;
 
     // 리뷰수
-    private long reviewCnt;
+    private Long reviewCnt;
 
 }

@@ -12,12 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
+@ToString(exclude = { "member", "movie" })
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
-@ToString(exclude = { "member", "movie" })
+@Entity
 public class Review extends BaseEntity {
 
     @Id
@@ -33,4 +33,13 @@ public class Review extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
+
+    public void changeGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public void changeText(String text) {
+        this.text = text;
+    }
+
 }

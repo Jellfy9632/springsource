@@ -11,8 +11,8 @@ import lombok.ToString;
 
 @ToString
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class ReviewDTO {
@@ -20,13 +20,16 @@ public class ReviewDTO {
     private Long rno;
     private int grade;
     private String text;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 
     // member
     private Long mid;
     private String email;
     private String nickname;
 
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
+    // movie
+
+    private Long mno;
 
 }
