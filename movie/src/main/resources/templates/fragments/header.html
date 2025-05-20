@@ -26,12 +26,18 @@
             ></path>
           </svg>
         </div>
-        <input
-          class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-          type="text"
-          placeholder="Search for projects"
-          aria-label="Search"
-        />
+        <form th:action="@{/movie/list}" method="get" id="searchForm">
+          <input type="hidden" name="type" value="title" />
+          <input type="hidden" name="page" value="1" />
+          <input type="hidden" name="size" value="10" />
+          <input
+            class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+            type="text"
+            name="keyword"
+            placeholder="Search for movies"
+            aria-label="Search"
+          />
+        </form>
       </div>
     </div>
     <ul class="flex items-center flex-shrink-0 space-x-6">
@@ -142,6 +148,7 @@
         </button>
         <template x-if="isProfileMenuOpen">
           <ul
+            sec:authorize="isAuthenticated()"
             x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
@@ -153,7 +160,7 @@
             <li class="flex">
               <a
                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="#"
+                th:href="@{/member/profile}"
               >
                 <svg
                   class="w-4 h-4 mr-3"
@@ -173,7 +180,7 @@
             <li class="flex">
               <a
                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="#"
+                th:href="@{/member/leave}"
               >
                 <svg
                   class="w-4 h-4 mr-3"
@@ -190,13 +197,13 @@
                   ></path>
                   <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                <span>Settings</span>
+                <span>회원탈퇴</span>
               </a>
             </li>
             <li class="flex">
               <a
                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="#"
+                th:href="@{/member/logout}"
               >
                 <svg
                   class="w-4 h-4 mr-3"

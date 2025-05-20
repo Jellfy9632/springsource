@@ -38,10 +38,10 @@ const reviewList = () => {
       result += `<div class="text-muted"><span class="small">${formatDate(review.createdDate)}</span></div></div>`;
       result += `<div class="d-flex flex-column align-self-center">`;
 
-      //if (loginUser == reply.replyerEmail) {
-      result += `<div class="mb-2"><button class="btn btn-outline-danger btn-sm">삭제</button></div>`;
-      result += `<div><button class="btn btn-outline-success btn-sm">수정</button></div>`;
-      //   }
+      if (loginUser == review.email) {
+        result += `<div class="mb-2"><button class="btn btn-outline-danger btn-sm">삭제</button></div>`;
+        result += `<div><button class="btn btn-outline-success btn-sm">수정</button></div>`;
+      }
       result += `</div></div>`;
     });
     reviewDiv.innerHTML = result;
